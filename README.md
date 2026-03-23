@@ -50,16 +50,16 @@ K_e = t A (B^T D B)
 ```text
 FEM-2D-Elasticity-MATLAB/
 │
-├── main.m                  # Main driver script
 ├── bilinear.m              # Element stiffness (CST)
 ├── domain.m                # Mesh generation
 ├── linear_body.m           # Body force vector
 ├── linear_point.m          # Traction load
-├── properties.m            # Stress & displacement post-processing
+├── main.m                  # Main driver script
 ├── params.m                # Problem parameters
+├── properties.m            # Stress & displacement post-processing
 ├── rectTriMesh.m           # Structured mesh generator
-├── triBoundaryEdges.m      # Boundary detection
 ├── solveLinearSystem.m     # Solver
+├── triBoundaryEdges.m      # Boundary detection
 │
 ├── utils/                        # Reusable helper functions
 │   ├── gaussQuadrature.m        # Numerical integration
