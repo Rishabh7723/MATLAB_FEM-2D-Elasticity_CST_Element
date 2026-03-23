@@ -1,134 +1,33 @@
-# FEM-2D-Elasticity-MATLAB
+# Lab 4: 2D Uniform Bar (DistMesh + CST Triangles)
 
-## 📌 Overview
+## Goal
+Solve a 2D linear elasticity model of a uniform bar:
+- Domain: rectangle `[0, L] x [-W/2, W/2]`
+- Element: linear triangular (CST), 2 DOFs per node `(u_x, u_y)`
+- Loading: uniform traction on `x = L` such that total force is `P`
+- BC: `u_x = 0` on `x = 0`, and one `u_y` DOF is pinned to remove rigid motion
 
-This project implements a **2D Finite Element Method (FEM) solver** in MATLAB for linear elasticity problems using **Constant Strain Triangle (CST) elements**. It supports **plane stress and plane strain analysis** and demonstrates the response of a uniformly loaded rectangular bar.
+## DistMesh dependency
+This version assumes you already have the original DistMesh repository on the MATLAB path.
+It calls:
+- `distmesh2d`
+- `drectangle`
+- `huniform`
 
----
+The local `distmesh.m` file in this folder is not used by `domain.m`.
 
-## ⚙️ Features
-
-* 2D FEM solver for linear elasticity
-* CST (triangular) elements
-* Plane stress and plane strain formulations
-* Mesh generation (DistMesh / structured)
-* Global stiffness assembly
-* Body force and traction loading
-* Dirichlet boundary conditions
-* Modular utility functions for reuse
-* Post-processing of displacement and stress
-
----
-
-## 📐 Governing Equation
-
-[
-\nabla \cdot \sigma + b = 0
-]
-
-Weak form:
-
-[
-K u = F
-]
-
----
-
-## 🧮 Element Formulation
-
-* **Element:** Constant Strain Triangle (CST)
-* Linear displacement → constant strain
-
-[
-K_e = t A (B^T D B)
-]
-
----
-
-## 🏗️ Project Structure
-
-```text
-FEM-2D-Elasticity-MATLAB/
-│
-├── main.m                  # Main driver script
-├── bilinear.m              # Element stiffness (CST)
-├── domain.m                # Mesh generation
-├── linear_body.m           # Body force vector
-├── linear_point.m          # Traction load
-├── properties.m            # Stress & displacement post-processing
-├── params.m                # Problem parameters
-├── rectTriMesh.m           # Structured mesh generator
-├── triBoundaryEdges.m      # Boundary detection
-├── solveLinearSystem.m     # Solver
-││
-├── utils/                        # Reusable helper functions
-│   ├── gaussQuadrature.m        # Numerical integration
-│   ├── plotField.m              # 1D field plotting
-│   ├── shapeFunctions1D.m       # Linear shape functions
-│   ├── shapeFunctionsHermiteBeam1D.m  # Beam interpolation (Hermite)
-│   └── solveLinearSystem.m      # Linear solver utility
-│
-├── .gitignore
-├── LICENSE
-└── README.md
-```
-
----
-
-## ▶️ How to Run
-
-1. Open MATLAB
-2. Navigate to project folder
+## Run
+1. Add the original DistMesh repository to the MATLAB path.
+2. Set MATLAB working directory to this folder.
 3. Run:
-
 ```matlab
 main
 ```
 
----
+## Diagnostic check
+When DistMesh is detected, `main.m` prints the resolved path of `distmesh2d`.
 
-## 📊 Output
-
-* Nodal displacements ((u_x, u_y))
-* Stress components ((\sigma_{xx}, \sigma_{yy}, \tau_{xy}))
-* Deformed mesh visualization
-* FEM vs analytical comparison
-
----
-
-## 🧪 Validation
-
-For a uniform bar under axial load:
-
-[
-\sigma_{xx} = \frac{P}{tW}
-]
-
----
-
-## ⚠️ Notes
-
-* Transverse deformation occurs due to **Poisson’s effect**
-* Over-constrained boundary conditions can introduce artificial bending
-* Mesh quality affects solution accuracy
-
----
-
-## 🚀 Future Improvements
-
-* Quadrilateral (Q4) elements
-* Nonlinear FEM
-* Dynamic analysis
-* Adaptive mesh refinement
-
----
-
-## 👨‍💻 Author
-
-**Rishabh Shukla**
-
----
-
-## 📜 License
-
-MIT License
+## Outputs
+- Deformed mesh plot
+- Triangle plot of `sigma_xx`
+- Interpolated displacements at a few query points
