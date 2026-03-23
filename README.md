@@ -77,15 +77,38 @@ FEM-2D-Elasticity-MATLAB/
 
 ## ▶️ How to Run
 
-1. Open MATLAB
-2. Navigate to project folder
-3. Run:
+### 1. Clone or download the repository
+
+---
+
+### 2. Setup DistMesh (Required for unstructured mesh)
+
+* Ensure the folder **`distMesh-main`** is available
+* Open MATLAB and navigate to the folder
+* Run the startup file:
+
+```matlab
+startup
+```
+
+This initializes DistMesh and adds required functions (e.g., `distmesh2d`) to the MATLAB path.
+
+---
+
+### 3. Run the FEM solver
+
+Navigate to the project folder and run:
 
 ```matlab
 main
 ```
 
 ---
+
+The code will automatically switch to a structured mesh.
+
+---
+
 
 ## 📊 Output
 
